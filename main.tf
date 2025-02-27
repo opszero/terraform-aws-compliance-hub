@@ -65,7 +65,7 @@ module "aws_logs_logs" {
 
 
 module "aws_guard_duty" {
-  source                       = "./modules/gaardduty"
+  source                       = "./modules/guardduty"
   enabled                      = var.guard_duty_enabled
   guardduty_enable             = true
   enable_s3_protection         = true
