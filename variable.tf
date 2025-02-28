@@ -52,3 +52,21 @@ variable "product_arns" {
   type        = list(string)
   default     = []
 }
+
+variable "enable_s3_protection" {
+  description = "Configure and enable S3 protection. Defaults to `true`."
+  type        = bool
+  default     = true
+}
+
+variable "enable_kubernetes_protection" {
+  description = "Configure and enable Kubernetes audit logs as a data source for Kubernetes protection. Defaults to `true`."
+  type        = bool
+  default     = true
+}
+
+variable "enable_malware_protection" {
+  description = "Configure and enable Malware Protection as data source for EC2 instances with findings for the detector. Defaults to `true`."
+  type        = bool
+  default     = true
+}

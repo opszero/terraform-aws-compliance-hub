@@ -7,14 +7,10 @@ locals {
   log_bucket_name = "${local.name}-cloudtrail-logs"
 
   enabled_standards_arns = flatten([
-    "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
-    "arn:aws:securityhub:${data.aws_region.current.name}::standards/pci-dss/v/3.2.1",
-    "arn:${data.aws_partition.current.partition}:securityhub:${data.aws_region.current.name}::standards/aws-foundational-security-best-practices/v/1.0.0",
     var.standards_arns
   ])
 
   enabled_product_arns = flatten([
-    "arn:aws:securityhub:${data.aws_region.current.name}::product/aws/guardduty",
     var.product_arns
   ])
 
@@ -68,9 +64,9 @@ module "aws_guard_duty" {
   source                       = "./modules/guardduty"
   enabled                      = var.guard_duty_enabled
   guardduty_enable             = true
-  enable_s3_protection         = true
-  enable_kubernetes_protection = true
-  enable_malware_protection    = true
+  enable_s3_protection         = var.enable_s3_protection
+  enable_kubernetes_protection = var.enable_kubernetes_protection
+  enable_malware_protection    = var.enable_malware_protection
   enable_topic                 = true
 
   sns-topic-name = "guardduty-sns-topic"
