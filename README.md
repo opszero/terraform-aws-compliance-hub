@@ -11,6 +11,9 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_cloudtrail_enabled"></a> [cloudtrail\_enabled](#input\_cloudtrail\_enabled) | Enables AWS CloudTrail. Defaults to true. Setting this to false will disable CloudTrail. | `bool` | `true` | no |
 | <a name="input_ebs_enabled"></a> [ebs\_enabled](#input\_ebs\_enabled) | Enables Amazon EBS. Defaults to true. Setting this to false will disable EBS. | `bool` | `true` | no |
+| <a name="input_enable_kubernetes_protection"></a> [enable\_kubernetes\_protection](#input\_enable\_kubernetes\_protection) | Configure and enable Kubernetes audit logs as a data source for Kubernetes protection. Defaults to `true`. | `bool` | `true` | no |
+| <a name="input_enable_malware_protection"></a> [enable\_malware\_protection](#input\_enable\_malware\_protection) | Configure and enable Malware Protection as data source for EC2 instances with findings for the detector. Defaults to `true`. | `bool` | `true` | no |
+| <a name="input_enable_s3_protection"></a> [enable\_s3\_protection](#input\_enable\_s3\_protection) | Configure and enable S3 protection. Defaults to `true`. | `bool` | `true` | no |
 | <a name="input_guard_duty_enabled"></a> [guard\_duty\_enabled](#input\_guard\_duty\_enabled) | Enables AWS GuardDuty. Defaults to true. Setting this to false will disable GuardDuty. | `bool` | `true` | no |
 | <a name="input_logs_enabled"></a> [logs\_enabled](#input\_logs\_enabled) | Enables logging. Defaults to true. Setting this to false will pause logging. | `bool` | `true` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name used for identifying resources. This can be used for naming EBS, GuardDuty, and other services. | `string` | `"secure"` | no |
