@@ -22,10 +22,24 @@ resource "aws_guardduty_detector" "guardduty" {
   }
 }
 
+resource "aws_kms_key" "sns_key" {
+  count                   = var.enabled && var.enable_topic ? 1 : 0
+  description             = "KMS key for SNS topic encryption"
+  deletion_window_in_days = 10
+  enable_key_rotation     = true
+}
+
+resource "aws_kms_alias" "sns_key_alias" {
+  count         = var.enabled && var.enable_topic ? 1 : 0
+  name          = "alias/sns-encryption-key"
+  target_key_id = aws_kms_key.sns_key[0].id
+}
+
 resource "aws_sns_topic" "sns_topic" {
-  count = var.enabled && var.enable_topic ? 1 : 0
-  name  = var.sns-topic-name
-  tags  = var.tags
+  count             = var.enabled && var.enable_topic ? 1 : 0
+  name              = var.sns-topic-name
+  kms_master_key_id = aws_kms_key.sns_key[0].arn
+  tags              = var.tags
 
   delivery_policy = var.delivery_policy
 }
