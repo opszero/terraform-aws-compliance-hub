@@ -159,7 +159,7 @@ variable "tags" {
 
 variable "versioning_status" {
   description = "A string that indicates the versioning status for the log bucket."
-  default     = "Disabled"
+  default     = "Enabled"
   type        = string
   validation {
     condition     = contains(["Enabled", "Disabled", "Suspended"], var.versioning_status)

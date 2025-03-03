@@ -40,7 +40,7 @@ module "logs" {
   source                = "./modules/logs"
   enabled               = var.logs_enabled
   s3_bucket_name        = "${local.name}-aws-logs"
-  logging_target_bucket = local.log_bucket_name
+  logging_target_bucket = "${local.name}-aws-logs"
   logging_target_prefix = "/logs/s3/${local.name}-aws-logs"
   default_allow         = true
   force_destroy         = true
@@ -51,12 +51,13 @@ module "aws_logs_logs" {
   source  = "./modules/logs"
   enabled = var.logs_enabled
 
-  s3_bucket_name = local.log_bucket_name
-  default_allow  = false
-  allow_s3       = true
-  s3_logs_prefix = "/logs/s3/${local.name}-aws-logs"
-  force_destroy  = true
-  tags           = local.tags
+  s3_bucket_name        = local.log_bucket_name
+  logging_target_bucket = "${local.name}-aws-logs"
+  default_allow         = false
+  allow_s3              = true
+  s3_logs_prefix        = "/logs/s3/${local.log_bucket_name}"
+  force_destroy         = true
+  tags                  = local.tags
 }
 
 
