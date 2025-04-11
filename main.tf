@@ -104,3 +104,49 @@ module "security_hub" {
   enabled_standards_arns = local.enabled_standards_arns
   enabled_product_arns   = local.enabled_product_arns
 }
+
+module "aws_iam" {
+  source                = "./modules/iam"
+  iam_enabled           = var.iam_enabled
+  name                  = var.name
+  org_feature_set       = var.org_feature_set
+  org_policy_types      = var.org_policy_types
+  policy_type_to_enable = var.policy_type_to_enable
+
+  mfa_deny_condition                = var.mfa_deny_condition
+  mfa_exception_actions             = var.mfa_exception_actions
+  allow_view_account_info_actions   = var.allow_view_account_info_actions
+  allow_manage_own_mfa_actions      = var.allow_manage_own_mfa_actions
+  allow_change_own_password_actions = var.allow_change_own_password_actions
+  deny_if_no_mfa_not_actions        = var.deny_if_no_mfa_not_actions
+
+
+  handler            = var.handler
+  runtime            = var.runtime
+  timeout            = var.timeout
+  memory_size        = var.memory_size
+  lambda_iam_actions = var.lambda_iam_actions
+  lambda_log_actions = var.lambda_log_actions
+
+  target_id                      = var.target_id
+  lambda_permission_statement_id = var.lambda_permission_statement_id
+  lambda_permission_principal    = var.lambda_permission_principal
+  sid_put_object                 = var.sid_put_object
+  sid_bucket_acl                 = var.sid_bucket_acl
+  bucket_acl_condition           = var.bucket_acl_condition
+  lambda_policy_description      = var.lambda_policy_description
+
+  include_global_service_events = var.include_global_service_events
+  is_multi_region_trail         = var.is_multi_region_trail
+  enable_log_file_validation    = var.enable_log_file_validation
+
+  minimum_password_length        = var.minimum_password_length
+  require_numbers                = var.require_numbers
+  require_uppercase_characters   = var.require_uppercase_characters
+  require_lowercase_characters   = var.require_lowercase_characters
+  require_symbols                = var.require_symbols
+  allow_users_to_change_password = var.allow_users_to_change_password
+  max_password_age               = var.max_password_age
+  password_reuse_prevention      = var.password_reuse_prevention
+  hard_expiry                    = var.hard_expiry
+}

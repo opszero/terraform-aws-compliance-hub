@@ -1,97 +1,7 @@
-variable "tags" {
-  description = "A mapping of tags to CloudTrail resources."
-  default     = {}
-  type        = map(string)
-}
-
-variable "ebs_enabled" {
-  description = "Enables Amazon EBS. Defaults to true. Setting this to false will disable EBS."
-  default     = true
-  type        = bool
-}
-
-variable "guard_duty_enabled" {
-  description = "Enables AWS GuardDuty. Defaults to true. Setting this to false will disable GuardDuty."
-  default     = true
-  type        = bool
-}
-
-variable "logs_enabled" {
-  description = "Enables logging. Defaults to true. Setting this to false will pause logging."
-  default     = true
-  type        = bool
-}
-
-variable "cloudtrail_enabled" {
-  description = "Enables AWS CloudTrail. Defaults to true. Setting this to false will disable CloudTrail."
-  default     = false
-  type        = bool
-}
-
-variable "security_hub_enabled" {
-  description = "Enables AWS Security Hub. Defaults to true. Setting this to false will disable Security Hub."
-  default     = true
-  type        = bool
-}
-
 variable "name" {
-  description = "The name used for identifying resources. This can be used for naming EBS, GuardDuty, and other services."
+  description = "Prefix used in naming the IAM policy"
   type        = string
-  default     = "secure"
-}
-
-variable "standards_arns" {
-  description = "A list of additional ARNs for the Security Hub standards."
-  type        = list(string)
-  default     = []
-}
-
-variable "product_arns" {
-  description = "A list of additional ARNs for the Security Hub products."
-  type        = list(string)
-  default     = []
-}
-
-variable "enable_s3_protection" {
-  description = "Configure and enable S3 protection. Defaults to `true`."
-  type        = bool
-  default     = true
-}
-
-variable "enable_kubernetes_protection" {
-  description = "Configure and enable Kubernetes audit logs as a data source for Kubernetes protection. Defaults to `true`."
-  type        = bool
-  default     = true
-}
-
-variable "enable_malware_protection" {
-  description = "Configure and enable Malware Protection as data source for EC2 instances with findings for the detector. Defaults to `true`."
-  type        = bool
-  default     = true
-}
-
-variable "iam_enabled" {
-  description = "Enables Amazon EBS. Defaults to true. Setting this to false will disable EBS."
-  default     = true
-  type        = bool
-}
-
-variable "lambda_role_name" {
-  description = "(string) The name of the IAM role for Lambda"
-  type        = string
-  default     = "ForceMFAForNewUsers"
-}
-
-variable "lambda_policy_name" {
-  description = "(string) The name of the IAM policy for Lambda"
-  type        = string
-  default     = "MFAEnforcementPolicy"
-}
-
-variable "lambda_function_name" {
-  description = "(string) The name of the Lambda function"
-  type        = string
-  default     = "ForceMFAOnNewUser"
+  default     = "MFA"
 }
 
 variable "org_feature_set" {
@@ -367,4 +277,10 @@ variable "hard_expiry" {
   description = "Whether users are prevented from setting a new password after their password has expired"
   type        = bool
   default     = false
+}
+
+variable "iam_enabled" {
+  description = "Enable or disable IAM related resources"
+  type        = bool
+  default     = true
 }

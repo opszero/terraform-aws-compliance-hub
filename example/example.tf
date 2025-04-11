@@ -4,10 +4,11 @@ provider "aws" {
 
 
 module "compliance" {
-  source               = "git::https://github.com/opszero/terraform-aws-compliance-hub"
+  source               = "./../."
   name                 = "opszero"
-  security_hub_enabled = true
-  logs_enabled         = true
-  ebs_enabled          = true
-  guard_duty_enabled   = true
+  security_hub_enabled = false
+  logs_enabled         = false
+  ebs_enabled          = false
+  guard_duty_enabled   = false
+  iam_enabled          = true
 }
